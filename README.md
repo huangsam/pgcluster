@@ -17,11 +17,8 @@ Database 1:
     start postgres
     su - postgres
     psql
-    CREATE TABLE guestbook (visitor_email text, vistor_id serial, date timestamp, message text);
-    INSERT INTO guestbook (visitor_email, date, message) VALUES ( 'jim@gmail.com', current_date, 'This is a test.');
-    SELECT * FROM guestbook;
+    # create sample data
     CREATE ROLE replicator PASSWORD 'replicate' LOGIN REPLICATION;
-    \q
     # modify pg_hba.conf
     # modify postgresql.conf
     systemctl restart postgresql
@@ -32,8 +29,11 @@ Database 2:
     systemctl stop postgresql
     # modify pg_hba.conf
     # modify postgresql.conf
-    # create recovery.conf
-    systemctl restart postgresql
+    cd /var/lib/postgresql/9.6
+    pg_basebackup -R -h 172.28.128.3 -U replicator -D replica
+    rm -rf main
+    mv replica main
+    systemctl start postgresql
 
 ## Container method
 
