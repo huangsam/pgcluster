@@ -1,20 +1,31 @@
-# Database hosts
+# Postgres Cluster
 
-What was provided by DHCP:
+This is a playground for all things Postgres-related.
+
+In particular, this repository covers the intricacies of deploying a master-slave configuration into production.
+
+## Vagrant Setup
+
+What was provided by `vboxnet`:
 
     172.28.128.3 pgmaster
     172.28.128.4 pgslave
 
-## VM method
+Feel free to change the IPs in the `Vagrantfile` as necessary, but note that certain configuration will need to modified accordingly.
+
+## VM Method
+
+Here are links to help you install Postgres:
 
 - [Setup: Debian](https://www.postgresql.org/download/linux/debian/)
 - [Setup: Ubuntu](https://www.postgresql.org/download/linux/ubuntu/)
 - [Setup: Red Hat](https://www.postgresql.org/download/linux/redhat/)
 
-Database 1:
+### Postgres Master
 
-    init postgres
-    start postgres
+Here are the instructions:
+
+    # install postgres
     su - postgres
     psql
     # create sample data
@@ -23,9 +34,11 @@ Database 1:
     # modify postgresql.conf
     systemctl restart postgresql
 
-Database 2:
+### Postgres Slave
 
-    init postgres
+Here are the instructions:
+
+    # install postgres
     systemctl stop postgresql
     # modify pg_hba.conf
     # modify postgresql.conf
@@ -35,6 +48,6 @@ Database 2:
     mv replica main
     systemctl start postgresql
 
-## Container method
+## Container Method
 
 Still unsure...TBD.
