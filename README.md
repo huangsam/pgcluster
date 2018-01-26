@@ -26,10 +26,13 @@ Here are links to help you install Postgres:
 Here are the instructions:
 
     # install postgres
+    passwd postgres
     su - postgres
     psql
     # create sample data
     CREATE ROLE replicator PASSWORD 'replicate' LOGIN REPLICATION;
+    # ssh-keygen
+    # ssh-copy-id postgres@172.28.128.4
     # modify pg_hba.conf
     # modify postgresql.conf
     systemctl restart postgresql
@@ -39,13 +42,15 @@ Here are the instructions:
 Here are the instructions:
 
     # install postgres
+    passwd postgres
     systemctl stop postgresql
     # modify pg_hba.conf
     # modify postgresql.conf
     cd /var/lib/postgresql/9.6
     pg_basebackup -R -h 172.28.128.3 -U replicator -D replica
-    rm -rf main
+    mv main main.old
     mv replica main
+    # modify main/recovery.conf
     systemctl start postgresql
 
 ## Container Method

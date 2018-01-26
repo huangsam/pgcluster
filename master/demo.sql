@@ -6,3 +6,5 @@ SELECT visitor_email FROM guestbook;
 # After replication
 SELECT * FROM pg_stat_replication;
 SELECT pg_is_in_recovery();
+INSERT INTO guestbook (visitor_email, date, message) VALUES ( 'bob@gmail.com', current_date, 'Another test.');
+INSERT INTO guestbook (visitor_email, date, message) VALUES ( 'mary@gmail.com', current_date, 'Final test.');
