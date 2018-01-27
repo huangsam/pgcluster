@@ -63,8 +63,12 @@ Here are links to help you install Docker:
 
 ### Postgres Master
 
-TBD
+    # install docker
+    docker pull postgres:9.6
+    # more stuff...
 
 ### Postgres Slave
 
-TBD
+    # install docker
+    docker pull postgres:9.6
+    # more stuff...
