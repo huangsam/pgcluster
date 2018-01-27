@@ -30,7 +30,6 @@ Here are the instructions:
     su - postgres
     psql
     # create sample data
-    CREATE ROLE replicator PASSWORD 'replicate' LOGIN REPLICATION;
     # ssh-keygen
     # ssh-copy-id postgres@172.28.128.4
     # modify pg_hba.conf
@@ -65,10 +64,30 @@ Here are links to help you install Docker:
 
     # install docker
     docker pull postgres:9.6
-    # more stuff...
+    docker run -d -p 5432:5432 -v pgdir:/var/lib/postgresql --name pgmaster --net host postgres:9.6
+    docker exec -it pgmaster bash
+    gosu postgres psql
+    # create sample data
+    # modify pg_hba.conf
+    # modify postgresql.conf
+    docker restart pgmaster
+    docker exec -it pgmaster bash
+    gosu postgres psql
 
 ### Postgres Slave
 
     # install docker
     docker pull postgres:9.6
-    # more stuff...
+    docker run -d -p 5432:5432 -v pgdir:/var/lib/postgresql --name pgslave --net host postgres:9.6
+    docker stop pgslave
+    docker run --rm -it --volumes-from pgslave --name pgbackup --net host postgres:9.6 bash
+    cd /var/lib/postgresql
+    pg_basebackup -R -h 172.28.128.3 -U replicator -D replica
+    chown -R postgres:postgres replica
+    rm -rf data/*
+    mv replica/* data/
+    rmdir replica
+    # modify pg_hba.conf
+    docker start pgslave
+    docker exec -it pgslave bash
+    gosu postgres psql
