@@ -1,6 +1,6 @@
 # Before replication
 CREATE TABLE guestbook (visitor_email text, vistor_id serial, date timestamp, message text);
-INSERT INTO guestbook (visitor_email, date, message) VALUES ( 'jim@gmail.com', current_date, 'This is a test.');
+INSERT INTO guestbook (visitor_email, date, message) VALUES ('jim@gmail.com', current_date, 'This is a test.');
 SELECT visitor_email FROM guestbook;
 
 # Postgres specific
