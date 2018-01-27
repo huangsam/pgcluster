@@ -55,4 +55,16 @@ Here are the instructions:
 
 ## Container Method
 
-Still unsure...TBD.
+Here are links to help you install Docker:
+
+- [Setup: Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
+- [Setup: Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+- [Setup: CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
+
+### Postgres Master
+
+TBD
+
+### Postgres Slave
+
+TBD
