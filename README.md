@@ -64,6 +64,7 @@ Here are links to help you install Docker:
 
     # install docker
     docker pull postgres:9.6
+    # build custom postgres
     # create pgmaster container
     docker exec -it pgmaster bash
     gosu postgres psql
@@ -78,6 +79,7 @@ Here are links to help you install Docker:
 
     # install docker
     docker pull postgres:9.6
+    # build custom postgres
     # create pgslave container
     docker stop pgslave
     # create pgbackup container

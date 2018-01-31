@@ -1,2 +1,3 @@
 FROM postgres:9.6
-RUN apt-get update && apt-get install -y rsync && apt-get clean
+RUN mkdir /home/postgres && chown -R postgres:postgres /home/postgres
+RUN apt-get update && apt-get install -y rsync openssh-client && apt-get clean
