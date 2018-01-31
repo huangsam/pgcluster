@@ -64,7 +64,7 @@ Here are links to help you install Docker:
 
     # install docker
     docker pull postgres:9.6
-    docker run -d -p 5432:5432 -v pgdir:/var/lib/postgresql --name pgmaster --net host postgres:9.6
+    # create pgmaster container
     docker exec -it pgmaster bash
     gosu postgres psql
     # create sample data
@@ -78,9 +78,9 @@ Here are links to help you install Docker:
 
     # install docker
     docker pull postgres:9.6
-    docker run -d -p 5432:5432 -v pgdir:/var/lib/postgresql --name pgslave --net host postgres:9.6
+    # create pgslave container
     docker stop pgslave
-    docker run --rm -it --volumes-from pgslave --name pgbackup --net host postgres:9.6 bash
+    # create pgbackup container
     cd /var/lib/postgresql
     pg_basebackup -R -h 172.28.128.3 -U replicator -D replica
     chown -R postgres:postgres replica
